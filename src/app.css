@@ -1,0 +1,28 @@
+.app {
+    /* display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 700px;
+    width: 700px;
+    flex-direction: column;
+    color: green;
+    border: 2px solid gray;
+    border-radius: 7px 12px 7px 0; */
+    padding: 0 20% 20%;
+    background-image: linear-gradient(to top right, rgb(213, 255, 174), rgb(211, 211, 211), rgb(166, 178, 248));
+}
+
+.appBody,
+.userPost {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+}
+
+.userPost {
+    padding: 10px;
+    color: rgb(75, 70, 70);
+    border: 1px dotted purple;
+    border-radius: 7px 0 7px 0;
+}
