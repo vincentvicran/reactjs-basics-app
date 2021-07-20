@@ -62,3 +62,7 @@ a {
     background-color: indigo;
     cursor: pointer;
 }
+
+.bottom:hover {
+    background-color: rebeccapurple;
+}
