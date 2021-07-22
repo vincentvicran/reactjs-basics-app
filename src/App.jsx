@@ -1,42 +1,41 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './app.css';
-import SingleComment from './components/SingleComment';
-import UserCard from './components/UserCard';
-import profile1 from './image/1.png';
-import profile2 from './image/2.png';
-import profile3 from './image/3.png';
+import HemisphereDisplay from './components/HemisphereDisplay';
 
-const App = () => {
-    return (
-        <div className="app">
-            <div className="appBody">
-                <UserCard>
-                    <div className="userPost">My name is Vikrant Shrestha.</div>
+class App extends Component {
+    //? STATE
+    state = { latitude: null, errorMessage: '' };
 
-                    <SingleComment
-                        name="Vikrant Shrestha"
-                        date="Today at 5:00pm"
-                        text="Fantastic, Nice outfit!!!"
-                        picture={profile1}
-                    />
+    //? AFTER COMPONENT MOUNTS, FIND THE LATITUDE
+    componentDidMount() {
+        window.navigator.geolocation.getCurrentPosition(
+            (position) => {
+                console.table(position);
+                this.setState({ latitude: position.coords.latitude });
+            },
+            (error) => {
+                this.setState({ errorMessage: error.message });
+            }
+        );
+        console.table(this.state.latitude);
+    }
 
-                    <SingleComment
-                        name="Adeet Gede"
-                        date="Today at 6:00pm"
-                        text="Fabulous, it's nice!!!"
-                        picture={profile2}
-                    />
+    //? RENDER THE COMPONENT
+    render() {
+        if (this.state.errorMessage && !this.state.latitude) {
+            return <div>{this.state.errorMessage}</div>;
+        }
 
-                    <SingleComment
-                        name="Rozeel Gedaless"
-                        date="Today at 5:00pm"
-                        text="Gorgeous, very very beautiful!!!"
-                        picture={profile3}
-                    />
-                </UserCard>
-            </div>
-        </div>
-    );
-};
+        if (!this.state.errorMessage && this.state.latitude) {
+            return (
+                <div>
+                    <HemisphereDisplay latitude={this.state.latitude} />
+                </div>
+            );
+        } else {
+            return <div>Loading...</div>;
+        }
+    }
+}
 
 export default App;
